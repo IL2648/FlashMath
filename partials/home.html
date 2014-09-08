@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-3">
+		<div class="well" style="margin-top:20px;">
+			<label>Difficulty</label><br/>
+			<div range-slider min="1" max="5" model-max="maxRating" pin-handle="min"></div>
+			<label>Topics</label><br/>
+			<label><input type="checkbox" ng-model="addition"> Addition</label><br/>
+			<label><input type="checkbox" ng-model="subtraction"> Subtraction</label><br/>
+			<label><input type="checkbox" ng-model="multiplication"> Multiplication</label><br/>
+			<label><input type="checkbox" ng-model="division"> Division</label><br/>
+			<button type="button" class="btn btn-primary btn-block" ng-click="newProblem()" style="margin-top:10px; font-size:18px;">New Problem</button>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-12">
+			<div class="well" style="font-size:128px;text-align:center;">
+				{{numone}} {{operation}} {{numtwo}}
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="form-group has-{{has}}">
+		    	<div class="input-group">
+		      	<div class="input-group-addon" style="font-size:128px;">=</div>
+		      	<input class="form-control" type="text" placeholder="answer" ng-readonly ="correct" ng-change="check()" ng-model="answer" style="font-size:102px;height:144px;">
+		    	</div>
+		  	</div>
+		</div>
+	</div>
+</div>
