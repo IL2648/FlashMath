@@ -4,7 +4,7 @@
 
 angular.module('myApp.controllers', [])
   .controller('HomeCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
-  		$scope.init = function () {
+      $scope.init = function () {
         $scope.maxRating=1;
         $scope.addition = true;
         $scope.subtraction = false;
@@ -16,7 +16,11 @@ angular.module('myApp.controllers', [])
         $scope.answer = "";
         $scope.has = "warning";
         $scope.correct = false;
-  		}
+        $scope.alert = "warning";
+        $scope.messagePre = "Hi there! ";
+        $scope.message = "Please enter your answer at the bottom, the equal sign will turn green when you get the correct answer. ";
+        $scope.initialized = 0;
+      }
       $scope.check = function() {
         switch ($scope.operation){
           case "+":
@@ -55,6 +59,57 @@ angular.module('myApp.controllers', [])
       }
       $scope.newProblem = function() {
         var ops = [];
+        if($scope.initialized != 0){
+          switch ($scope.operation){
+            case "+":
+              if($scope.numone + $scope.numtwo == $scope.answer){
+                $scope.alert = "success";
+                $scope.messagePre = "Nice answer! ";
+                $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
+              } else {
+                var correct = $scope.numone + $scope.numtwo;
+                $scope.alert = "danger";
+                $scope.messagePre = "Too bad! ";
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+              }
+              break;
+            case "-":
+              if($scope.numone - $scope.numtwo == $scope.answer){
+                $scope.alert = "success";
+                $scope.messagePre = "Nice answer! ";
+                $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
+              } else {
+                var correct = $scope.numone - $scope.numtwo;
+                $scope.alert = "danger";
+                $scope.messagePre = "Too bad! ";
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+              }
+              break;
+            case "x":
+              if($scope.numone * $scope.numtwo == $scope.answer){
+                $scope.alert = "success";
+                $scope.messagePre = "Nice answer! ";
+                $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
+              } else {
+                var correct = $scope.numone * $scope.numtwo;
+                $scope.alert = "danger";
+                $scope.messagePre = "Too bad! ";
+               $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+              }
+              break;
+            case "/":
+              if($scope.numone / $scope.numtwo == $scope.answer){
+                $scope.alert = "success";
+                $scope.messagePre = "Nice answer! ";
+                $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
+              } else {
+                var correct = $scope.numone / $scope.numtwo;
+                $scope.alert = "danger";
+                $scope.messagePre = "Too bad! ";
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;              }
+              break;
+          }
+        }
         if($scope.addition){
           ops += "+";
         }
@@ -92,9 +147,11 @@ angular.module('myApp.controllers', [])
         }
         $scope.has = "warning";
         $scope.correct = false;
+        $scope.answer = "";
       }
       $scope.init();
       $scope.newProblem();
+      $scope.initialized = 1;
   }])
   .controller('BusinessCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
   }])
