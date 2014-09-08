@@ -4,6 +4,18 @@ FlashMath
 
 the repository for the k-12 program designed to help kids with math
 
+How to run:
+  
+  1.) You can run this on any server as long as it serves the index.html file.
+  
+  2.) If you dont know how to set up a server, xampp is a very easy server and required no effort to start.
+    
+    a.) Go to https://www.apachefriends.org/index.html and follow the installation instructions.
+    
+    b.) Copy the entire repo into the htdocs folder in your xampp installation.
+    
+    c.) Start the xampp control panel and start the apache server service.
+
 
 Please use the standard workflow of:
 
