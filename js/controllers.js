@@ -22,9 +22,28 @@ angular.module('myApp.controllers', [])
         $scope.initialized = 0;
       }
       $scope.check = function() {
+        var dec = 1;
+        switch($scope.maxRating){
+          case 1:
+            dec = 10;
+            break;
+          case 2:
+            dec = 100;
+            break;
+          case 3:
+            dec = 100;
+            break;
+          case 4:
+            dec = 1000;
+            break;
+          case 5:
+            dec = 10000;
+            break;
+        }
         switch ($scope.operation){
           case "+":
-            if($scope.numone + $scope.numtwo == $scope.answer){
+            var ans = Math.floor((Number($scope.numone) + Number($scope.numtwo))*dec)/dec;
+            if(ans == $scope.answer){
               $scope.has = "success";
               $scope.correct = true;
             } else {
@@ -32,7 +51,8 @@ angular.module('myApp.controllers', [])
             }
             break;
           case "-":
-            if($scope.numone - $scope.numtwo == $scope.answer){
+            var ans = Math.floor(($scope.numone - $scope.numtwo)*dec)/dec;
+            if(ans == $scope.answer){
               $scope.has = "success";
               $scope.correct = true;
             } else {
@@ -40,7 +60,8 @@ angular.module('myApp.controllers', [])
             }
             break;
           case "x":
-            if($scope.numone * $scope.numtwo == $scope.answer){
+            var ans = Math.floor(($scope.numone * $scope.numtwo)*dec)/dec;
+            if(ans == $scope.answer){
               $scope.has = "success";
               $scope.correct = true;
             } else {
@@ -48,7 +69,8 @@ angular.module('myApp.controllers', [])
             }
             break;
           case "/":
-            if($scope.numone / $scope.numtwo == $scope.answer){
+            var ans = Math.floor(($scope.numone / $scope.numtwo)*dec)/dec;
+            if(ans == $scope.answer){
               $scope.has = "success";
               $scope.correct = true;
             } else {
@@ -59,54 +81,72 @@ angular.module('myApp.controllers', [])
       }
       $scope.newProblem = function() {
         var ops = [];
+        var dec = 1;
+        switch($scope.maxRating){
+          case 1:
+            dec = 10;
+            break;
+          case 2:
+            dec = 100;
+            break;
+          case 3:
+            dec = 100;
+            break;
+          case 4:
+            dec = 1000;
+            break;
+          case 5:
+            dec = 10000;
+            break;
+        }
         if($scope.initialized != 0){
           switch ($scope.operation){
             case "+":
-              if($scope.numone + $scope.numtwo == $scope.answer){
+              var ans = Math.floor(($scope.numone + $scope.numtwo)*dec)/dec;
+              if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
                 $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
               } else {
-                var correct = $scope.numone + $scope.numtwo;
                 $scope.alert = "danger";
                 $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
               }
               break;
             case "-":
-              if($scope.numone - $scope.numtwo == $scope.answer){
+              var ans = Math.floor(($scope.numone - $scope.numtwo)*dec)/dec;
+              if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
                 $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
               } else {
-                var correct = $scope.numone - $scope.numtwo;
                 $scope.alert = "danger";
                 $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
               }
               break;
             case "x":
-              if($scope.numone * $scope.numtwo == $scope.answer){
+              var ans = Math.floor(($scope.numone * $scope.numtwo)*dec)/dec;
+              if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
                 $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
               } else {
-                var correct = $scope.numone * $scope.numtwo;
                 $scope.alert = "danger";
                 $scope.messagePre = "Too bad! ";
-               $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;
+               $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
               }
               break;
             case "/":
-              if($scope.numone / $scope.numtwo == $scope.answer){
+              var ans = Math.floor(($scope.numone / $scope.numtwo)*dec)/dec;
+              if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
                 $scope.message = "You were correct, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + $scope.answer;
               } else {
-                var correct = $scope.numone / $scope.numtwo;
                 $scope.alert = "danger";
                 $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + correct + ", not " + $scope.answer;              }
+                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;              }
               break;
           }
         }
@@ -123,18 +163,36 @@ angular.module('myApp.controllers', [])
           ops += "/";
         }
         $scope.operation = ops[Math.floor(Math.random() * ops.length)];
-        switch($scope.maxRating){ //there needs to be a special case for division, cause that shit could be really hard even with small numbers.... also needs to make sure the second number is smaller than the first for the first difficulty
+        switch($scope.maxRating){ //there needs to be a special case for division, cause that shit could be really hard even with small number.... also needs to make sure the second Number is smaller than the first for the first difficulty
           case 1:
-            $scope.numone = Math.floor(Math.random() * 10) + 1;
-            $scope.numtwo = Math.floor(Math.random() * 10) + 1;
+            if($scope.operation == "-"){
+              $scope.numone = Math.floor(Math.random() * 10) + 1;
+              $scope.numtwo = Math.floor(Math.random() * $scope.numtwo) + 1;
+            } else if($scope.operation == "/"){
+              $scope.numtwo = Math.floor(Math.random() * 10) + 1;
+              $scope.numone = $scope.numtwo * (Math.floor(Math.random() * 5) + 1);
+            } else {
+              $scope.numone = Math.floor(Math.random() * 10) + 1;
+              $scope.numtwo = Math.floor(Math.random() * 10) + 1;
+            }
             break;
           case 2:
-            $scope.numone = Math.floor(Math.random() * 100) + 1;
-            $scope.numtwo = Math.floor(Math.random() * 100) + 1;
+            if($scope.operation == "/"){
+              $scope.numtwo = Math.floor(Math.random() * 100) + 1;
+              $scope.numone = $scope.numtwo * (Math.floor(Math.random() * 10) + 1);
+            } else {
+              $scope.numone = Math.floor(Math.random() * 100) + 1;
+              $scope.numtwo = Math.floor(Math.random() * 100) + 1;
+            }
             break;
           case 3:
-            $scope.numone = (Math.floor(Math.random() * 100) + 1)/10;
-            $scope.numtwo = (Math.floor(Math.random() * 100) + 1)/10;
+            if($scope.operation == "/"){
+              $scope.numtwo = Math.floor(Math.random() * 20) + 1;
+              $scope.numone = Math.floor(Math.random() * 20) + 1;
+            } else {
+              $scope.numone = (Math.floor(Math.random() * 100) + 1)/10;
+              $scope.numtwo = (Math.floor(Math.random() * 100) + 1)/10;
+            }
             break;
           case 4:
             $scope.numone = (Math.floor(Math.random() * 1000) + 1)/10;
