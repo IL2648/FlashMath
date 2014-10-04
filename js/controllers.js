@@ -215,6 +215,8 @@ angular.module('myApp.controllers', [])
   }])
   .controller('MapCtrl', ['$scope', '$http', function($scope, $http) {
   }])
+  .controller('StatsCtrl', ['$scope', '$http', function($scope, $http) {
+  }])
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
