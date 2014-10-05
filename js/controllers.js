@@ -215,6 +215,56 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
   }])
   .controller('MapCtrl', ['$scope', '$http', function($scope, $http) {
   }])
+  .controller('HelpCtrl', ['$scope', '$http', function($scope, $http) {
+      $scope.init = function () {
+        $scope.anyExpanded = false;
+        var difficultyInfo = "Difficulty level for generated problems can be changed using the sliding bar on " +
+                                "the left side of the page. Slide the bar to the right for more difficult problems, or " +
+                                " to the left for less difficulty. Please note your changes will not be applied until you " + 
+                                "click the 'New Problem' button.";
+        var topicsInfo = "Question topics can be changed in the left side of the page under the section 'Topics.' You may " +
+                                "select one or more topics to be quizzed on. Generated problems will randomly rotate through " +
+                                "the topics of your selection. Please note your changes will not be applied until you " + 
+                                "click the 'New Problem' button.";
+        var answeringAQuestionInfo = "Answer a displayed question by clicking in the text area preceeded by the '=' sign and "+
+                                "with the grey text saying 'answer.' As soon as you start typing, the color of the box will turn "+
+                                "green or red, indicating the correctness of your answer. If the box is red, your answer is incorrect "+
+                                ". If it is green, you were right! After you answer a question sufficiently or feel like giving up "+
+                                "or moving to the next question, just click the 'New Problem' button on the left. You will then be "+
+                                "presented with a new problem, and the info text above the problem will display how did you on the "+
+                                "previous problem.";
+        var movingToNextQuestionInfo = "To move onto the next question, click the 'New Problem' button at any time.";
+        $scope.helpTopics = [{title:'Difficulty',show:false,info:difficultyInfo},
+                            {title:'Math Topics',show:false,info:topicsInfo},
+                            {title:'Answering a Question',show:false,info:answeringAQuestionInfo},
+                            {title:'Moving to Next Question',show:false,info:movingToNextQuestionInfo}];
+      }
+      $scope.getExpandedTopic = function(){
+        for(var i=0;i<$scope.helpTopics.length;i++){
+          if($scope.helpTopics[i].show==true){
+            return $scope.helpTopics[i];
+          }
+        }
+        return null;
+      }
+      $scope.expand = function(option){
+        //If another topic is expanded, switch out which one is expanded
+        if($scope.anyExpanded){
+          var expandedTopic = $scope.getExpandedTopic();
+          if(expandedTopic==option){
+            option.show = !option.show;
+            $scope.anyExpanded = option.show;
+          } else{
+            expandedTopic.show = false;
+            option.show = true;
+          }
+        } else{
+          option.show = !option.show;
+          $scope.anyExpanded = option.show;
+        }
+      }
+      $scope.init();
+  }])
   .controller('StatsCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.exampleData = [
       { key: "13% wrong", y: 13 },

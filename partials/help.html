@@ -1,3 +1,10 @@
 <div class="row">
-	<label>Welcome to the Help Page</label><br/>
+	<h1>Welcome to the Help Page</h1>
+	<h4>Please click to expand a topic you wish to learn more about.</h4>
+	<ul ng-repeat="item in helpTopics" ng-click="expand(item)">
+	  <li class="helpTopicName"><b>{{item.title}}</b></li>
+	  <div>
+	  	<span class="tab" ng-show="item.show"><i>{{item.info}}</i></span>
+	  </div>
+	</ul>
 </div>
