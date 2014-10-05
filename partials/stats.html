@@ -1,3 +1,52 @@
 <div class="row">
-	<label>Statistics for current user will go here</label><br/>
+	<div class="col-md-4" style="margin-left:auto;margin-right:auto;float:none;">
+		<div class="well">
+			<form class="form-inline" role="form">
+				<div class="form-group">
+					Difficulty: 
+		    		<select class="form-control" id="Style" ng-model="difficulty">
+		    			<option value="0">All</option>
+			  			<option value="1">1</option>
+			  			<option value="2">2</option>
+			  			<option value="3">3</option>
+			  			<option value="4">4</option>
+			  			<option value="5">5</option>
+					</select>
+		  		</div>
+	  			<div class="form-group">
+	  				Subject: 
+			    	<select class="form-control" id="Style" ng-model="subject">
+				  		<option value="0">All</option>
+				  		<option value="1">Addition</option>
+				  		<option value="2">Subtraction</option>
+				  		<option value="3">Multiplication</option>
+				  		<option value="4">Division</option>
+					</select>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4" style="height:360px;line-height:360px;color:{{gradeColor()}};font-size:128px;text-align:center;vertical-align:middle;">
+		{{grade}}A+
+	</div>
+	<div class="col-md-4">
+		<nvd3-pie-chart
+	    	data="exampleData"
+	        id="exampleId"
+	        width="256"
+	        height="256"
+	        x="xFunction()"
+	        y="yFunction()"
+	        showLabels="true"
+	        color="colorFunction()">
+	        <svg></svg>
+	    </nvd3-pie-chart>
+	</div>
+	<div class="col-md-4" style="font-size:32px;height:360px;line-height:180px;vertical-align:middle;">
+	<span>870 Correct</span>
+	<div style="border-bottom:2px solid #333;width:100%;"></div>
+	<span>1000 Total</span>
+	</div>
 </div>

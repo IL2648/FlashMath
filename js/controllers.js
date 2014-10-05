@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
+angular.module('myApp.controllers', ['nvd3ChartDirectives'])
   .controller('HomeCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
       $scope.init = function () {
         $scope.maxRating=1;
@@ -216,6 +216,33 @@ angular.module('myApp.controllers', [])
   .controller('MapCtrl', ['$scope', '$http', function($scope, $http) {
   }])
   .controller('StatsCtrl', ['$scope', '$http', function($scope, $http) {
+    $scope.exampleData = [
+      { key: "13% wrong", y: 13 },
+      { key: "98% correct", y: 87 }
+     ];
+     $scope.difficulty = 0;
+     $scope.subject = 0;
+
+    var colorArray = ['#da4f49', '#5bb75b'];
+
+
+    $scope.colorFunction = function() {
+      return function(d, i) {
+          return colorArray[i];
+        };
+    }
+
+     $scope.xFunction = function(){
+        return function(d) {
+            return d.key;
+        };
+    }
+
+    $scope.yFunction = function(){
+        return function(d) {
+            return d.y;
+        };
+    }
   }])
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function (viewLocation) { 
