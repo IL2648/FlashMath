@@ -298,4 +298,47 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
     $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     }
+  }])
+  .controller('HistoryCtrl', ['$scope', '$http', function($scope, $http) {
+    $scope.difficulty = 0;
+    $scope.subject = 0;
+    $scope.limit = 0;
+    $scope.problems = [
+      {
+        'success' : 'success',
+        'difficulty' : 'easy',
+        'argOne' : '4',
+        'operation' : '+',
+        'argTwo' : '2',
+        'correct' : '6',
+        'answer' : '6'
+      },
+      {
+        'success' : 'success',
+        'difficulty' : 'easy',
+        'argOne' : '4',
+        'operation' : '+',
+        'argTwo' : '2',
+        'correct' : '6',
+        'answer' : '6'
+      },
+      {
+        'success' : 'danger',
+        'difficulty' : 'easy',
+        'argOne' : '4',
+        'operation' : '+',
+        'argTwo' : '7',
+        'correct' : '11',
+        'answer' : '10'
+      },
+      {
+        'success' : 'success',
+        'difficulty' : 'easy',
+        'argOne' : '4',
+        'operation' : '+',
+        'argTwo' : '2',
+        'correct' : '6',
+        'answer' : '6'
+      }
+    ];
   }]);
