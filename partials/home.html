@@ -18,13 +18,17 @@
 				{{numone}} {{operation}} {{numtwo}}
 			</div>
 		</div>
-		<div class="col-md-12">
-			<div class="form-group has-{{has}}">
-		    	<div class="input-group">
-		      	<div class="input-group-addon" style="font-size:128px;">=</div>
-		      	<input class="form-control" type="text" placeholder="answer" ng-readonly ="correct" ng-change="check()" ng-model="answer" style="font-size:102px;height:144px;">
-		    	</div>
-		  	</div>
+		<div class="row">
+			<div class="col-md-3">
+				<button type="button" class="btn btn-primary" style="font-size:64px;" ng-click="answerProblem()">Submit</button>
+			</div>
+			<div class="col-md-9">
+				<div class="form-group">
+			    	<div class="input-group">
+			      		<input class="form-control" type="text" placeholder="answer" ng-readonly ="correct" ng-model="answer" style="font-size:64px;height:105px;">
+			    	</div>
+			  	</div>
+			</div>
 		</div>
 	</div>
 </div>
