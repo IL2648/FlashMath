@@ -4,7 +4,7 @@
 			<form class="form-inline" role="form">
 				<div class="form-group">
 					Difficulty: 
-		    		<select class="form-control" id="Style" ng-model="difficulty">
+		    		<select class="form-control" id="Style" ng-model="difficulty" ng-change="getStatistics()">
 		    			<option value="0">All</option>
 			  			<option value="1">1</option>
 			  			<option value="2">2</option>
@@ -15,7 +15,7 @@
 		  		</div>
 	  			<div class="form-group">
 	  				Subject: 
-			    	<select class="form-control" id="Style" ng-model="subject">
+			    	<select class="form-control" id="Style" ng-model="subject" ng-change="getStatistics()">
 				  		<option value="0">All</option>
 				  		<option value="1">Addition</option>
 				  		<option value="2">Subtraction</option>
@@ -29,7 +29,7 @@
 </div>
 <div class="row">
 	<div class="col-md-4" style="height:360px;line-height:360px;color:{{gradeColor()}};font-size:128px;text-align:center;vertical-align:middle;">
-		{{grade}}A+
+		{{getGrade()}}
 	</div>
 	<div class="col-md-4">
 		<nvd3-pie-chart
@@ -45,8 +45,8 @@
 	    </nvd3-pie-chart>
 	</div>
 	<div class="col-md-4" style="font-size:32px;height:360px;line-height:180px;vertical-align:middle;">
-	<span>870 Correct</span>
+	<span>{{correct}} Correct</span>
 	<div style="border-bottom:2px solid #333;width:100%;"></div>
-	<span>1000 Total</span>
+	<span>{{total}} Total</span>
 	</div>
 </div>

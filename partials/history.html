@@ -4,7 +4,7 @@
 			<form class="form-inline" role="form">
 				<div class="form-group">
 					Difficulty: 
-		    		<select class="form-control" id="Style" ng-model="difficulty">
+		    		<select class="form-control" id="Style" ng-model="difficulty" ng-change="getHistory()">
 		    			<option value="0">All</option>
 			  			<option value="1">1</option>
 			  			<option value="2">2</option>
@@ -15,7 +15,7 @@
 		  		</div>
 	  			<div class="form-group">
 	  				Subject: 
-			    	<select class="form-control" id="Style" ng-model="subject">
+			    	<select class="form-control" id="Style" ng-model="subject" ng-change="getHistory()">
 				  		<option value="0">All</option>
 				  		<option value="1">Addition</option>
 				  		<option value="2">Subtraction</option>
@@ -25,12 +25,12 @@
 			  </div>
 			  <div class="form-group">
 	  				Limit: 
-			    	<select class="form-control" id="Style" ng-model="limit">
-				  		<option value="0">Last 10</option>
-				  		<option value="1">Last 25</option>
-				  		<option value="2">Last 50</option>
-				  		<option value="3">Last 100</option>
-				  		<option value="4">All</option>
+			    	<select class="form-control" id="Style" ng-model="limit" ng-change="getHistory()">
+				  		<option value="10">Last 10</option>
+				  		<option value="25">Last 25</option>
+				  		<option value="50">Last 50</option>
+				  		<option value="100">Last 100</option>
+				  		<option value="0">All</option>
 					</select>
 			  </div>
 			</form>
@@ -48,9 +48,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="problem in problems" class="{{problem.success}}">
+        <tr ng-repeat="problem in problems track by $index" class="{{getSuccess($index)}}">
           <td>{{problem.difficulty}}</td>
-          <td>{{problem.argOne}} {{problem.operation}} {{problem.argTwo}}</td>
+          <td>{{problem.argOne}} {{getop($index)}} {{problem.argTwo}}</td>
           <td>{{problem.correct}}</td>
           <td>{{problem.answer}}</td>
         </tr>

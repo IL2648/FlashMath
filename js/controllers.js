@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['nvd3ChartDirectives'])
-  .controller('HomeCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
+  .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', function($scope, $http, $location, User) {
       $scope.init = function () {
         $scope.maxRating=1;
         $scope.addition = true;
@@ -49,6 +49,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             } else {
               $scope.has = "error";
             }
+            return ans;
             break;
           case "-":
             var ans = Math.floor(($scope.numone - $scope.numtwo)*dec)/dec;
@@ -58,6 +59,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             } else {
               $scope.has = "error";
             }
+            return ans;
             break;
           case "x":
             var ans = Math.floor(($scope.numone * $scope.numtwo)*dec)/dec;
@@ -67,6 +69,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             } else {
               $scope.has = "error";
             }
+            return ans;
             break;
           case "/":
             var ans = Math.floor(($scope.numone / $scope.numtwo)*dec)/dec;
@@ -76,12 +79,42 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             } else {
               $scope.has = "error";
             }
+            return ans;
             break;
+        }
+      }
+      $scope.reportProblem = function() {
+        if($scope.initialized != 0){
+        switch ($scope.operation){
+          case "+":
+            var op = 1;
+            break;
+          case "-":
+            var op = 2; 
+            break;
+          case "x":
+            var op = 3;
+            break;
+          case "/":
+            var op = 4;
+            break;
+        }
+        if($scope.correct){
+          var correct = 1;
+        } else {
+          var correct = 0;
+        }
+        $http({method: 'POST', url: '../php/problem.php?difficulty='+$scope.maxRating+'&success='+correct+'&argOne='+$scope.numone+'&argTwo='+$scope.numtwo+'&operation='+op+'&correct='+$scope.check()+'&answer='+$scope.answer+'&userId='+User.userId}).
+          success(function(data, status, headers, config) {
+          }).
+          error(function(data, status, headers, config) {
+        });
         }
       }
       $scope.newProblem = function() {
         var ops = [];
         var dec = 1;
+        $scope.reportProblem();
         switch($scope.maxRating){
           case 1:
             dec = 10;
@@ -207,9 +240,9 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
         $scope.correct = false;
         $scope.answer = "";
       }
+      $scope.initialized = 1;
       $scope.init();
       $scope.newProblem();
-      $scope.initialized = 1;
   }])
   .controller('BusinessCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
   }])
@@ -265,16 +298,69 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
       }
       $scope.init();
   }])
-  .controller('StatsCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('StatsCtrl', ['$scope', '$http', 'userService', function($scope, $http, User) {
     $scope.exampleData = [
-      { key: "13% wrong", y: 13 },
-      { key: "98% correct", y: 87 }
+      { key: "correct", y: 1 },
+      { key: "wrong", y: 1 }
      ];
      $scope.difficulty = 0;
      $scope.subject = 0;
+     $scope.correct = 0;
+     $scope.total = 0;
 
     var colorArray = ['#da4f49', '#5bb75b'];
 
+    $scope.getStatistics = function() {
+      $http({method: 'get', url: '../php/stats.php?userId='+User.userId+'&difficulty='+$scope.difficulty+'&subject='+$scope.subject}).
+        success(function(data, status, headers, config) {
+          var datum = [
+            {
+              key : Math.floor((parseInt(data['wrong'])/(parseInt(data['correct']) + parseInt(data['wrong'])))*100)+"% wrong",
+              y : parseInt(data['wrong'])
+            },
+            {
+              key : Math.floor((parseInt(data['correct'])/(parseInt(data['correct']) + parseInt(data['wrong'])))*100)+"% correct",
+              y : parseInt(data['correct'])
+            }
+          ]
+          $scope.exampleData = datum;
+          $scope.correct = data['correct'];
+          $scope.total = data['correct'] + data['wrong'];
+        }).
+        error(function(data, status, headers, config) {
+      });
+    }
+
+    $scope.getGrade = function() {
+      if($scope.correct / $scope.total < .60){
+        return "F";
+      } else if ($scope.correct / $scope.total < .70){
+        return "D";
+      } else if ($scope.correct / $scope.total < .73){
+        return "C-";
+      } else if ($scope.correct / $scope.total < .77){
+        return "C";
+      } else if ($scope.correct / $scope.total < .80){
+        return "C+";
+      } else if ($scope.correct / $scope.total < .83){
+        return "B-";
+      } else if ($scope.correct / $scope.total < .87){
+        return "B";
+      } else if ($scope.correct / $scope.total < .90){
+        return "B+";
+      } else if ($scope.correct / $scope.total < .93){
+        return "A-";
+      } else if ($scope.correct / $scope.total < .97){
+        return "A";
+      } else {
+        return "A+"; 
+      }
+    }
+    
+
+    $scope.init = function() {
+      $scope.getStatistics();
+    }
 
     $scope.colorFunction = function() {
       return function(d, i) {
@@ -293,52 +379,65 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             return d.y;
         };
     }
+
+    $scope.init();
   }])
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     }
   }])
-  .controller('HistoryCtrl', ['$scope', '$http', function($scope, $http) {
+  .controller('HistoryCtrl', ['$scope', '$http', 'userService', function($scope, $http, User) {
     $scope.difficulty = 0;
     $scope.subject = 0;
-    $scope.limit = 0;
-    $scope.problems = [
-      {
-        'success' : 'success',
-        'difficulty' : 'easy',
-        'argOne' : '4',
-        'operation' : '+',
-        'argTwo' : '2',
-        'correct' : '6',
-        'answer' : '6'
-      },
-      {
-        'success' : 'success',
-        'difficulty' : 'easy',
-        'argOne' : '4',
-        'operation' : '+',
-        'argTwo' : '2',
-        'correct' : '6',
-        'answer' : '6'
-      },
-      {
-        'success' : 'danger',
-        'difficulty' : 'easy',
-        'argOne' : '4',
-        'operation' : '+',
-        'argTwo' : '7',
-        'correct' : '11',
-        'answer' : '10'
-      },
-      {
-        'success' : 'success',
-        'difficulty' : 'easy',
-        'argOne' : '4',
-        'operation' : '+',
-        'argTwo' : '2',
-        'correct' : '6',
-        'answer' : '6'
+    $scope.limit = 10;
+    $scope.problems = [];
+    $scope.init = function() {
+      $scope.getHistory();
+    }
+    $scope.getHistory = function(){
+      $http({method: 'get', url: '../php/problem.php?userId='+User.userId+'&difficulty='+$scope.difficulty+'&subject='+$scope.subject+'&limit='+$scope.limit}).
+        success(function(data, status, headers, config) {
+          $scope.problems = data;
+        }).
+        error(function(data, status, headers, config) {
+          $scope.problems = data;
+      });
+    }
+    $scope.getop = function($index){
+      var problem = $scope.problems[$index];
+      switch(problem.operation){
+        case '1':
+          return '+';
+        break;
+        case '2':
+          return '-';
+        break;
+        case '3':
+          return 'X';
+        break;
+        case '4':
+          return '/';
+        break;
       }
-    ];
+    }
+    $scope.getSuccess = function($index){
+      var problem = $scope.problems[$index];
+      if(problem.success == 1){
+        return "success";
+      } else {
+        return "danger";
+      }
+    }
+    $scope.getDifficulty = function($index){
+      var problem = $scope.problems[$index];
+      if(problem.difficulty == 1){
+        return "easy";
+      } else if(problem.difficulty < 4){
+        return "medium";
+      } else {
+        return "hard";
+      }
+    }
+    $scope.init();
   }]);
