@@ -5,6 +5,7 @@
 angular.module('myApp.controllers', ['nvd3ChartDirectives'])
   .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', function($scope, $http, $location, User) {
       $scope.init = function () {
+        $scope.initialized = 0;
         $scope.maxRating=1;
         $scope.addition = true;
         $scope.subtraction = false;
@@ -19,6 +20,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
         $scope.alert = "warning";
         $scope.messagePre = "Hi there! ";
         $scope.message = "Please enter your answer at the bottom, the equal sign will turn green when you get the correct answer. ";
+        $scope.newProblem();
         $scope.initialized = 0;
       }
       $scope.check = function() {
@@ -240,9 +242,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
         $scope.correct = false;
         $scope.answer = "";
       }
-      $scope.initialized = 1;
       $scope.init();
-      $scope.newProblem();
   }])
   .controller('BusinessCtrl', ['$scope', '$http', '$location', 'BusinessService', function($scope, $http, $location, Business) {
   }])
