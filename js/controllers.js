@@ -359,10 +359,10 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
                                 "presented with a new problem, and the info text above the problem will display how did you on the "+
                                 "previous problem.";
         var movingToNextQuestionInfo = "To move onto the next question, click the 'New Problem' button at any time.";
-        $scope.helpTopics = [{title:'Difficulty',show:false,info:difficultyInfo},
-                            {title:'Math Topics',show:false,info:topicsInfo},
-                            {title:'Answering a Question',show:false,info:answeringAQuestionInfo},
-                            {title:'Moving to Next Question',show:false,info:movingToNextQuestionInfo}];
+        $scope.helpTopics = [{expandSymbol:"+",title:'Difficulty',show:false,info:difficultyInfo},
+                            {expandSymbol:"+",title:'Math Topics',show:false,info:topicsInfo},
+                            {expandSymbol:"+",title:'Answering a Question',show:false,info:answeringAQuestionInfo},
+                            {expandSymbol:"+",title:'Moving to Next Question',show:false,info:movingToNextQuestionInfo}];
       }
       $scope.getExpandedTopic = function(){
         for(var i=0;i<$scope.helpTopics.length;i++){
@@ -381,11 +381,22 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
             $scope.anyExpanded = option.show;
           } else{
             expandedTopic.show = false;
+            $scope.changeOutExpandMinimizeSymbol(expandedTopic)
             option.show = true;
           }
         } else{
           option.show = !option.show;
           $scope.anyExpanded = option.show;
+        }
+        //finally, change out the symbol in front indicating if you can expand or minimize
+        $scope.changeOutExpandMinimizeSymbol(option)
+      }
+      $scope.changeOutExpandMinimizeSymbol = function(option){
+        //revise +/- expand symbol
+        if(option.show==true){
+          option.expandSymbol = "-"
+        } else{
+          option.expandSymbol = "+"
         }
       }
       $scope.init();
