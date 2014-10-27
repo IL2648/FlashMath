@@ -145,8 +145,8 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
                 $scope.correct = true;
               } else {
                 $scope.alert = "danger";
-                $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
+                $scope.messagePre = "Whoops! ";
+                $scope.message = "That answer was incorrect. " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
                 $scope.correct = false;
               }
               break;
@@ -159,8 +159,8 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
                 $scope.correct = true;
               } else {
                 $scope.alert = "danger";
-                $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
+                $scope.messagePre = "Whoops! ";
+                $scope.message = "That answer was incorrect. " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
                 $scope.correct = false;
               }
               break;
@@ -173,8 +173,8 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
                 $scope.correct = true;
               } else {
                 $scope.alert = "danger";
-                $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
+                $scope.messagePre = "Whoops! ";
+                $scope.message = "That answer was incorrect. " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer;
                 $scope.correct = false;
               }
               break;
@@ -187,8 +187,8 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
                 $scope.correct = true;
               } else {
                 $scope.alert = "danger";
-                $scope.messagePre = "Too bad! ";
-                $scope.message = "you were wrong, " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer; 
+                $scope.messagePre = "Whoops! ";
+                $scope.message = "That answer was incorrect. " + $scope.numone + " " + $scope.operation + " " + $scope.numtwo + " = " + ans + ", not " + $scope.answer; 
                 $scope.correct = false;
               }
               break;
