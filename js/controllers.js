@@ -20,7 +20,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
         $scope.newProblem();
         $scope.alert = "warning";
         $scope.messagePre = "Hi there! ";
-        $scope.message = "Please enter your answer at the bottom, the equal sign will turn green when you get the correct answer. ";
+        $scope.message = "Please enter your answer at the bottom.";
         $scope.prevDiff = 1;
         $scope.initialized = 1;
       }
@@ -138,6 +138,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
           switch ($scope.operation){
             case "+":
               var ans = Math.floor(($scope.numone + $scope.numtwo)*dec)/dec;
+              $scope.answer = Math.floor(($scope.answer)*dec)/dec;
               if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
@@ -152,6 +153,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
               break;
             case "-":
               var ans = Math.floor(($scope.numone - $scope.numtwo)*dec)/dec;
+              $scope.answer = Math.floor(($scope.answer)*dec)/dec;
               if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
@@ -166,6 +168,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
               break;
             case "x":
               var ans = Math.floor(($scope.numone * $scope.numtwo)*dec)/dec;
+              $scope.answer = Math.floor(($scope.answer)*dec)/dec;
               if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
@@ -180,6 +183,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
               break;
             case "/":
               var ans = Math.floor(($scope.numone / $scope.numtwo)*dec)/dec;
+              $scope.answer = Math.floor(($scope.answer)*dec)/dec;
               if(ans == $scope.answer){
                 $scope.alert = "success";
                 $scope.messagePre = "Nice answer! ";
