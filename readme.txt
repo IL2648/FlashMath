@@ -1,7 +1,7 @@
 FlashMath - Educational Math Study Tool
 =========
 
-Hosted Application: https://67.247.89.72:80
+Hosted Application: http://IL2648.github.io/FlashMath
 Repo: https://github.com/IL2648/FlashMath.git
 
 
