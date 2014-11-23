@@ -11,3 +11,8 @@ angular.module('myApp.services', [])
 			userId : 1
 		};
 	}]);
+angular.module('myApp.services', []).factory('problem', function(){
+	return {
+		count: 1
+	};
+});

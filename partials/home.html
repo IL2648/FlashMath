@@ -8,12 +8,14 @@
 			<label><input type="checkbox" ng-model="subtraction"> Subtraction</label><br/>
 			<label><input type="checkbox" ng-model="multiplication"> Multiplication</label><br/>
 			<label><input type="checkbox" ng-model="division"> Division</label><br/>
-			<button type="button" class="btn btn-primary btn-block" ng-click="newProblem()" style="margin-top:10px; font-size:18px;">New Problem</button>
+			<button type="button" class="btn btn-primary btn-block" ng-click="newProblem();problemInfo.count=1;" style="margin-top:10px; font-size:18px;">New Problem</button>
 		</div>
 	</div>
 	<div class="col-md-9">
 		<div class="alert alert-{{alert}}" role="alert"><strong>{{messagePre}}</strong>{{message}}</div>
 		<div class="col-md-12">
+		
+		<label>{{problemInfo.count}}</label>
 			<div class="well" style="font-size:100px;text-align:center;">
 				{{numone}} {{operation}} {{numtwo}}
 			</div>

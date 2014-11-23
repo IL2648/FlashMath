@@ -3,8 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['nvd3ChartDirectives'])
-  .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', function($scope, $http, $location, User) {
+  .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', function($scope, $http, $location, User, Problem) {
       $scope.init = function () {
+      	$scope.problemInfo = Problem;
         $scope.initialized = 0;
         $scope.maxRating=1;
         $scope.addition = true;
@@ -260,6 +261,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
       $scope.newProblem = function() {
         var ops = [];
         var dec = 1;
+	$scope.problemInfo.count+=1;
         $scope.prevDiff = $scope.maxRating;
         switch($scope.maxRating){
           case 1:
@@ -490,7 +492,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
     $scope.init();
   }])
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
-    $scope.isActive = function (viewLocation) { 
+	    $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     }
   }])
