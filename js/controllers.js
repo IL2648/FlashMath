@@ -3,9 +3,9 @@
 /* Controllers */
 
 angular.module('myApp.controllers', ['nvd3ChartDirectives'])
-  .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', function($scope, $http, $location, User, Problem) {
+  .controller('HomeCtrl', ['$scope', '$http', '$location', 'userService', 'problemService', function($scope, $http, $location, User, Problem) {
       $scope.init = function () {
-      	$scope.problemInfo = Problem;
+        $scope.problemInfo = Problem;
         $scope.initialized = 0;
         $scope.maxRating=1;
         $scope.addition = true;
@@ -118,6 +118,8 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
       $scope.answerProblem = function() {
         var ops = [];
         var dec = 1;
+        Problem.count+=1;
+        $scope.problemInfo.count = Problem.count;
         switch($scope.maxRating){
           case 1:
             dec = 10;
@@ -214,7 +216,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
           ops += "/";
         }
         $scope.operation = ops[Math.floor(Math.random() * ops.length)];
-        switch($scope.maxRating){ //there needs to be a special case for division, cause that shit could be really hard even with small number.... also needs to make sure the second Number is smaller than the first for the first difficulty
+        switch($scope.maxRating){ //there needs to be a special case for division, cause that could be really hard even with small number.... also needs to make sure the second Number is smaller than the first for the first difficulty
           case 1:
             if($scope.operation == "-"){
               $scope.numone = Math.floor(Math.random() * 10) + 1;
@@ -261,7 +263,6 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
       $scope.newProblem = function() {
         var ops = [];
         var dec = 1;
-	$scope.problemInfo.count+=1;
         $scope.prevDiff = $scope.maxRating;
         switch($scope.maxRating){
           case 1:
@@ -492,7 +493,7 @@ angular.module('myApp.controllers', ['nvd3ChartDirectives'])
     $scope.init();
   }])
   .controller('NavCtrl', ['$scope', '$location', function($scope, $location) {
-	    $scope.isActive = function (viewLocation) { 
+      $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     }
   }])

@@ -10,9 +10,9 @@ angular.module('myApp.services', [])
 		return {
 			userId : 1
 		};
-	}]);
-angular.module('myApp.services', []).factory('problem', function(){
-	return {
-		count: 1
-	};
-});
+	}])
+	.factory('problemService', function(){
+		return {
+			count: 0
+		};
+	});
