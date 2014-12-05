@@ -13,6 +13,6 @@ angular.module('myApp.services', [])
 	}])
 	.factory('problemService', function(){
 		return {
-			count: 0
+			count: 1
 		};
 	});
