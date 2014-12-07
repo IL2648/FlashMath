@@ -41,4 +41,9 @@ Altering the category, length, and/or difficulty of a quiz without restarting
 
 Current Bug List
 --------
-No known bugs :D
+No known bugs
+
+Future Improvements
+--------
+Adding a check mark or X to the feedback message that appears after user submits a question
+Adding +,-,*,and / symbols next to the different topic options
